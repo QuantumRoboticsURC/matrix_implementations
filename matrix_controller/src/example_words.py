@@ -9,7 +9,8 @@ from geometry_msgs.msg import Twist
 
 
 def callback(data):
-    #rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+    print("corriendo")
+    rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
     pixels.fill((0, 0, 0))
     pixels.show()
     #GRB
@@ -52,14 +53,13 @@ if __name__ == '__main__':
     NUM_PIXELS = 64
     PIXEL_ORDER = neopixel.RGB
     COLORS = (0x000000, 0xFF0000, 0x00FF00, 0x0000FF)
-    DELAY = 0.01
+    DELAY = 0.1
 
     spi = board.SPI()
-    print(spi)
 
     pixels = neopixel.NeoPixel_SPI(spi,
-                                NUM_PIXELS,
-                                pixel_order=PIXEL_ORDER,
+                                NUM_PIXELS, brightness = 1.0,
+                                pixel_order=PIXEL_ORDER, 
                                 auto_write=False)
 
     listener()

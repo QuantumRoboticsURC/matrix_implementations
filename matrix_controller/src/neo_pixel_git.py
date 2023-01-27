@@ -55,7 +55,6 @@ if __name__ == '__main__':
     DELAY = 0.01
 
     spi = board.SPI()
-    print(spi)
 
     pixels = neopixel.NeoPixel_SPI(spi,
                                 NUM_PIXELS,
