@@ -30,21 +30,26 @@ class MatrixSignalReciever():
         self.matrix_signal_to_color_dict = {0: "matrix_off", 1: "blue", 2: "red", 3: "green"}
         self.matrix_color = self.matrix_signal_to_color_dict[0]
 
-    def matrix_signal_callback(data):
-        self.matrix_color = self.matrix_signal_to_color_dict[data.data]        
+    def matrix_signal_callback(self, data):
+        self.matrix_color = self.matrix_signal_to_color_dict[data.data]
+        rospy.loginfo("new signal recieved, signal is: {s}".format(s = data.data))
 
     def main(self):
         while not rospy.is_shutdown():
-            if self.matrix_color == "matrix_off":    
+            if self.matrix_color == "matrix_off":
+                rospy.loginfo("changing color to off")    
                 GPIO.output(self.pin_1, GPIO.LOW)
                 GPIO.output(self.pin_2, GPIO.LOW) 
             elif self.matrix_color == "blue":
+                rospy.loginfo("changing color to off")
                 GPIO.output(self.pin_1, GPIO.HIGH)
                 GPIO.output(self.pin_2, GPIO.LOW)
             elif self.matrix_color == "red":
+                rospy.loginfo("changing color to off")
                 GPIO.output(self.pin_1, GPIO.LOW)
                 GPIO.output(self.pin_2, GPIO.HIGH)
             elif self.matrix_color == "green":
+                rospy.loginfo("changing color to off")
                 GPIO.output(self.pin_1, GPIO.HIGH)
                 GPIO.output(self.pin_2, GPIO.HIGH)
         GPIO.output(self.pin_1, GPIO.LOW)
