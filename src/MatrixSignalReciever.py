@@ -16,7 +16,7 @@ from std_msgs.msg import String, Int8, Header
 
 
 class MatrixSignalReciever():
-    def __init__(self, aruco_dict = cv2.aruco.DICT_4X4_50):
+    def __init__(self):
         # ________ ros atributes initialization ______
         rospy.init_node("matrix_signal_reciever")
         rospy.Subscriber("/matrix_signal", Int8, self.matrix_signal_callback, queue_size=1)
