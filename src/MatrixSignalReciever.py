@@ -36,19 +36,19 @@ class MatrixSignalReciever():
     def main(self):
         while not rospy.is_shutdown():
             if self.matrix_color == "matrix_off":    
-                GPIO.output(pin_1, GPIO.LOW)
-                GPIO.output(pin_2, GPIO.LOW) 
+                GPIO.output(self.pin_1, GPIO.LOW)
+                GPIO.output(self.pin_2, GPIO.LOW) 
             elif self.matrix_color == "blue":
-                GPIO.output(pin_1, GPIO.HIGH)
-                GPIO.output(pin_2, GPIO.LOW)
+                GPIO.output(self.pin_1, GPIO.HIGH)
+                GPIO.output(self.pin_2, GPIO.LOW)
             elif self.matrix_color == "red":
-                GPIO.output(pin_1, GPIO.LOW)
-                GPIO.output(pin_2, GPIO.HIGH)
+                GPIO.output(self.pin_1, GPIO.LOW)
+                GPIO.output(self.pin_2, GPIO.HIGH)
             elif self.matrix_color == "green":
-                GPIO.output(pin_1, GPIO.HIGH)
-                GPIO.output(pin_2, GPIO.HIGH)
-        GPIO.output(pin_1, GPIO.LOW)
-        GPIO.output(pin_2, GPIO.LOW)
+                GPIO.output(self.pin_1, GPIO.HIGH)
+                GPIO.output(self.pin_2, GPIO.HIGH)
+        GPIO.output(self.pin_1, GPIO.LOW)
+        GPIO.output(self.pin_2, GPIO.LOW)
         GPIO.cleanup()
 
 
