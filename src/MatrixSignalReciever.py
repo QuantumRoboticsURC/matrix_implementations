@@ -24,8 +24,8 @@ class MatrixSignalReciever():
         self.pin_1 = 31
         self.pin_2 = 19
         GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(pin_1, GPIO.OUT)
-        GPIO.setup(pin_2, GPIO.OUT)
+        GPIO.setup(self.pin_1, GPIO.OUT)
+        GPIO.setup(self.pin_2, GPIO.OUT)
         # ________ logic attributes initialization ______
         self.matrix_signal_to_color_dict = {0: "matrix_off", 1: "blue", 2: "red", 3: "green"}
         self.matrix_color = self.matrix_signal_to_color_dict[0]
