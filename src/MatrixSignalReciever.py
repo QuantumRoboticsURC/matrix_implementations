@@ -21,11 +21,14 @@ class MatrixSignalReciever():
         rospy.init_node("matrix_signal_reciever")
         rospy.Subscriber("/matrix_signal", Int8, self.matrix_signal_callback, queue_size=1)
         # ________ Jetson TX2 initialization ______
-        self.pin_1 = 31
-        self.pin_2 = 19
+        self.pin_1 = 15
+        self.pin_2 = 22
+        self.pin_3 = 37
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.pin_1, GPIO.OUT)
         GPIO.setup(self.pin_2, GPIO.OUT)
+        GPIO.setup(self.pin_3, GPIO.OUT)
+        GPIO.output(self.pin_3, GPIO.LOW) # due to quantums animation
         # ________ logic attributes initialization ______
         self.matrix_signal_to_color_dict = {0: "matrix_off", 1: "blue", 2: "red", 3: "green"}
         self.matrix_color = self.matrix_signal_to_color_dict[0]
