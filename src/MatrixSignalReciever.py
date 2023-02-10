@@ -28,9 +28,8 @@ class MatrixSignalReciever():
         GPIO.setup(self.pin_1, GPIO.OUT)
         GPIO.setup(self.pin_2, GPIO.OUT)
         GPIO.setup(self.pin_3, GPIO.OUT)
-        GPIO.output(self.pin_3, GPIO.LOW) # due to quantums animation
         # ________ logic attributes initialization ______
-        self.matrix_signal_to_color_dict = {0: "matrix_off", 1: "blue", 2: "red", 3: "green"}
+        self.matrix_signal_to_color_dict = {0: "matrix_off", 1: "blue", 2: "red", 3: "green", 4:"quantum"}
         self.matrix_color = self.matrix_signal_to_color_dict[0]
 
     def matrix_signal_callback(self, data):
@@ -40,17 +39,26 @@ class MatrixSignalReciever():
     def main(self):
         while not rospy.is_shutdown():
             if self.matrix_color == "matrix_off":                
+                GPIO.output(self.pin_3, GPIO.LOW)
                 GPIO.output(self.pin_2, GPIO.LOW)
                 GPIO.output(self.pin_1, GPIO.LOW)                 
             elif self.matrix_color == "blue":     
+                GPIO.output(self.pin_3, GPIO.LOW)
                 GPIO.output(self.pin_2, GPIO.LOW)           
                 GPIO.output(self.pin_1, GPIO.HIGH)                
             elif self.matrix_color == "red":     
+                GPIO.output(self.pin_3, GPIO.LOW)
                 GPIO.output(self.pin_2, GPIO.HIGH)           
                 GPIO.output(self.pin_1, GPIO.LOW)                
             elif self.matrix_color == "green":    
+                GPIO.output(self.pin_3, GPIO.LOW)
                 GPIO.output(self.pin_2, GPIO.HIGH)            
                 GPIO.output(self.pin_1, GPIO.HIGH)                
+            elif self.matrix_color == "quantum":
+                GPIO.output(self.pin_3, GPIO.HIGH)
+                GPIO.output(self.pin_2, GPIO.LOW)
+                GPIO.output(self.pin_1, GPIO.LOW)
+        GPIO.output(self.pin_3, GPIO.LOW)
         GPIO.output(self.pin_1, GPIO.LOW)
         GPIO.output(self.pin_2, GPIO.LOW)
         GPIO.cleanup()
