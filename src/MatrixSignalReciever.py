@@ -32,7 +32,7 @@ class MatrixSignalReciever():
 
     def matrix_signal_callback(self, data):
         self.matrix_color = self.matrix_signal_to_color_dict[data.data]
-        rospy.loginfo("new signal recieved, signal is: {s}".format(s = data.data))
+        #rospy.loginfo("new signal recieved, signal is: {s}".format(s = data.data))
 
     def main(self):
         while not rospy.is_shutdown():
