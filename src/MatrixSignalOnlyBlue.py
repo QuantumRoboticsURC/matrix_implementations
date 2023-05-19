@@ -38,17 +38,20 @@ class MatrixSignalOnlyBlue():
         #rospy.loginfo("new signal recieved, signal is: {s}".format(s = data.data))
 
     def main(self):
-        while not rospy.is_shutdown():         
-            if self.matrix_color == "blue":     
-                GPIO.output(self.pin_3, GPIO.LOW)
-                GPIO.output(self.pin_2, GPIO.LOW)           
-                GPIO.output(self.pin_1, GPIO.HIGH)                               
-        GPIO.output(self.pin_3, GPIO.HIGH)
-        GPIO.output(self.pin_1, GPIO.LOW)
-        GPIO.output(self.pin_2, GPIO.LOW)
-        GPIO.cleanup()
+        while not rospy.is_shutdown():    
+            try:     
+                if self.matrix_color == "blue":     
+                    GPIO.output(self.pin_3, GPIO.LOW)
+                    GPIO.output(self.pin_2, GPIO.LOW)           
+                    GPIO.output(self.pin_1, GPIO.HIGH) 
+            except rospy.ROSInterruptException:                              
+                    GPIO.output(self.pin_3, GPIO.HIGH)
+                    GPIO.output(self.pin_1, GPIO.LOW)
+                    GPIO.output(self.pin_2, GPIO.LOW)
+                    GPIO.cleanup()
 
 
 if __name__ == "__main__":
     matrix_signal_only_blue = MatrixSignalOnlyBlue()
     matrix_signal_only_blue.main()
+   
