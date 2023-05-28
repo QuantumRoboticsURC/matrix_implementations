@@ -31,8 +31,16 @@ class MatrixSignalOnlyBlue():
         # ________ logic attributes initialization ______
         self.matrix_signal_to_color_dict = {1: "blue"}
         self.matrix_color = self.matrix_signal_to_color_dict[1]
-  
-     
+
+        self.matrix_signal_publisher = rospy.Publisher('/matrix_signal', Int8, queue_size=1)
+        self.matrix_signal_msg = Int8()
+
+        self.matrix_signal_msg.data = 1
+        self.r = rospy.Rate(10)
+
+                    
+                               
+
     def matrix_signal_callback(self, data):
         self.matrix_color = self.matrix_signal_to_color_dict[data.data]
         #rospy.loginfo("new signal recieved, signal is: {s}".format(s = data.data))
@@ -42,10 +50,13 @@ class MatrixSignalOnlyBlue():
             if self.matrix_color == "blue":     
                 GPIO.output(self.pin_3, GPIO.LOW)
                 GPIO.output(self.pin_2, GPIO.LOW)           
-                GPIO.output(self.pin_1, GPIO.HIGH) 
+                GPIO.output(self.pin_1, GPIO.HIGH)
+                self.matrix_signal_publisher.publish(self.matrix_signal_msg)    
+                self.r.sleep()
         GPIO.output(self.pin_3, GPIO.HIGH)
         GPIO.output(self.pin_1, GPIO.LOW)
         GPIO.output(self.pin_2, GPIO.LOW)
+             
         GPIO.cleanup()
    
 
